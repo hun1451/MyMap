@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_main);
-        
+
         previous_marker = new ArrayList<Marker>();
 
         Button button = (Button)findViewById(R.id.button);
