@@ -99,9 +99,10 @@ public class MainActivity extends AppCompatActivity
         Button btnFood = (Button) findViewById(R.id.btnFood);
         Button btnBus = (Button) findViewById(R.id.btnBus);
         Button btnPark = (Button) findViewById(R.id.btnPark);
-        Button btnBank = (Button) findViewById(R.id.btnCafe);
+        Button btnBank = (Button) findViewById(R.id.btnBank);
         Button btnCafe = (Button) findViewById(R.id.btnCafe);
-        Button btnShop = (Button) findViewById(R.id.btnCafe);
+        Button btnShop = (Button) findViewById(R.id.btnShop);
+        Button btnSubway = (Button) findViewById(R.id.btnSubway);
 
         btnFood.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,12 +138,21 @@ public class MainActivity extends AppCompatActivity
                 showCafeInformation(currentPosition); // 카페 위치 메소드 호출
             }
         });
+
         btnShop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showShopInformation(currentPosition); // 카페 위치 메소드 호출
             }
         });
+
+        btnSubway.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSubwayInformation(currentPosition); // 카페 위치 메소드 호출
+            }
+        });
+
 
 
 
@@ -259,6 +269,21 @@ public class MainActivity extends AppCompatActivity
                 .execute();
     }
 
+    public void showSubwayInformation(LatLng location) {
+        mGoogleMap.clear();//지도 클리어
+
+        if (previous_marker != null)
+            previous_marker.clear();//지역정보 마커 클리어
+
+        new NRPlaces.Builder()
+                .listener(MainActivity.this)
+                .key("AIzaSyAOtxROP-Ynn_otVKdD99FLnidOH6hGV0w")
+                .latlng(location.latitude, location.longitude)//현재 위치
+                .radius(500) //500 미터 내에서 검색
+                .type(PlaceType.SUBWAY_STATION) // 지하철역
+                .build()
+                .execute();
+    }
 
     @Override
     public void onResume() {
