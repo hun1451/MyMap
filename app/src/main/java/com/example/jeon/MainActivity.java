@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity
         Button btnPark = (Button) findViewById(R.id.btnPark);
         Button btnBank = (Button) findViewById(R.id.btnCafe);
         Button btnCafe = (Button) findViewById(R.id.btnCafe);
+        Button btnShop = (Button) findViewById(R.id.btnCafe);
 
         btnFood.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +137,14 @@ public class MainActivity extends AppCompatActivity
                 showCafeInformation(currentPosition); // 카페 위치 메소드 호출
             }
         });
+        btnShop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showShopInformation(currentPosition); // 카페 위치 메소드 호출
+            }
+        });
+
+
 
         Log.d(TAG, "onCreate");
         mActivity = this;
@@ -230,6 +239,22 @@ public class MainActivity extends AppCompatActivity
                 .latlng(location.latitude, location.longitude)//현재 위치
                 .radius(500) //500 미터 내에서 검색
                 .type(PlaceType.CAFE) // 카페
+                .build()
+                .execute();
+    }
+
+    public void showShopInformation(LatLng location) {
+        mGoogleMap.clear();//지도 클리어
+
+        if (previous_marker != null)
+            previous_marker.clear();//지역정보 마커 클리어
+
+        new NRPlaces.Builder()
+                .listener(MainActivity.this)
+                .key("AIzaSyAOtxROP-Ynn_otVKdD99FLnidOH6hGV0w")
+                .latlng(location.latitude, location.longitude)//현재 위치
+                .radius(500) //500 미터 내에서 검색
+                .type(PlaceType.SHOPPING_MALL) // 쇼핑몰
                 .build()
                 .execute();
     }
