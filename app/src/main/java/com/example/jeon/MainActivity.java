@@ -12,6 +12,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
+import android.animation.Animator;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -23,6 +24,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
+
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -149,6 +151,87 @@ public class MainActivity extends AppCompatActivity
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+    }
+
+    public void showFoodInformation(LatLng location) {
+        mGoogleMap.clear();//지도 클리어
+
+        if (previous_marker != null)
+            previous_marker.clear();//이전 마커 초기화
+
+        new NRPlaces.Builder()
+                .listener(MainActivity.this)
+                .key("AIzaSyAOtxROP-Ynn_otVKdD99FLnidOH6hGV0w")
+                .latlng(location.latitude, location.longitude)//현재 위치
+                .radius(500) //500 미터 내에서 검색
+                .type(PlaceType.RESTAURANT) //음식점
+                .build()
+                .execute();
+    }
+
+
+    public void showBusInformation(LatLng location) {
+        mGoogleMap.clear();//지도 클리어
+
+        if (previous_marker != null)
+            previous_marker.clear();//지역정보 마커 클리어
+
+        new NRPlaces.Builder()
+                .listener(MainActivity.this)
+                .key("AIzaSyAOtxROP-Ynn_otVKdD99FLnidOH6hGV0w")
+                .latlng(location.latitude, location.longitude)//현재 위치
+                .radius(500) //500 미터 내에서 검색
+                .type(PlaceType.BUS_STATION) // 버스정류장
+                .build()
+                .execute();
+    }
+
+    public void showParkInformation(LatLng location) {
+        mGoogleMap.clear();//지도 클리어
+
+        if (previous_marker != null)
+            previous_marker.clear();//지역정보 마커 클리어
+
+        new NRPlaces.Builder()
+                .listener(MainActivity.this)
+                .key("AIzaSyAOtxROP-Ynn_otVKdD99FLnidOH6hGV0w")
+                .latlng(location.latitude, location.longitude)//현재 위치
+                .radius(500) //500 미터 내에서 검색
+                .type(PlaceType.PARK) // 공원
+                .build()
+                .execute();
+    }
+
+    public void showBankInformation(LatLng location) {
+        mGoogleMap.clear();//지도 클리어
+
+        if (previous_marker != null)
+            previous_marker.clear();//지역정보 마커 클리어
+
+        new NRPlaces.Builder()
+                .listener(MainActivity.this)
+                .key("AIzaSyAOtxROP-Ynn_otVKdD99FLnidOH6hGV0w")
+                .latlng(location.latitude, location.longitude)//현재 위치
+                .radius(500) //500 미터 내에서 검색
+                .type(PlaceType.BANK) // 은행
+                .build()
+                .execute();
+    }
+
+    public void showCafeInformation(LatLng location) {
+        mGoogleMap.clear();//지도 클리어
+
+        if (previous_marker != null)
+            previous_marker.clear();//지역정보 마커 클리어
+
+        new NRPlaces.Builder()
+                .listener(MainActivity.this)
+                .key("AIzaSyAOtxROP-Ynn_otVKdD99FLnidOH6hGV0w")
+                .latlng(location.latitude, location.longitude)//현재 위치
+                .radius(500) //500 미터 내에서 검색
+                .type(PlaceType.CAFE) // 카페
+                .build()
+                .execute();
     }
 
 
@@ -693,85 +776,5 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public void showFoodInformation(LatLng location) {
-        mGoogleMap.clear();//지도 클리어
-
-        if (previous_marker != null)
-            previous_marker.clear();//이전 마커 초기화
-
-        new NRPlaces.Builder()
-                .listener(MainActivity.this)
-                .key("AIzaSyAOtxROP-Ynn_otVKdD99FLnidOH6hGV0w")
-                .latlng(location.latitude, location.longitude)//현재 위치
-                .radius(1000) //1000 미터 내에서 검색
-                .type(PlaceType.RESTAURANT) //음식점
-                .build()
-                .execute();
-    }
-
-
-    public void showBusInformation(LatLng location) {
-        mGoogleMap.clear();//지도 클리어
-
-        if (previous_marker != null)
-            previous_marker.clear();//지역정보 마커 클리어
-
-        new NRPlaces.Builder()
-                .listener(MainActivity.this)
-                .key("AIzaSyAOtxROP-Ynn_otVKdD99FLnidOH6hGV0w")
-                .latlng(location.latitude, location.longitude)//현재 위치
-                .radius(1000) //500 미터 내에서 검색
-                .type(PlaceType.BUS_STATION) // 버스정류장
-                .build()
-                .execute();
-    }
-
-    public void showParkInformation(LatLng location) {
-        mGoogleMap.clear();//지도 클리어
-
-        if (previous_marker != null)
-            previous_marker.clear();//지역정보 마커 클리어
-
-        new NRPlaces.Builder()
-                .listener(MainActivity.this)
-                .key("AIzaSyAOtxROP-Ynn_otVKdD99FLnidOH6hGV0w")
-                .latlng(location.latitude, location.longitude)//현재 위치
-                .radius(1000) //1000 미터 내에서 검색
-                .type(PlaceType.PARK) // 공원
-                .build()
-                .execute();
-    }
-
-    public void showBankInformation(LatLng location) {
-        mGoogleMap.clear();//지도 클리어
-
-        if (previous_marker != null)
-            previous_marker.clear();//지역정보 마커 클리어
-
-        new NRPlaces.Builder()
-                .listener(MainActivity.this)
-                .key("AIzaSyAOtxROP-Ynn_otVKdD99FLnidOH6hGV0w")
-                .latlng(location.latitude, location.longitude)//현재 위치
-                .radius(1000) //1000 미터 내에서 검색
-                .type(PlaceType.BANK) // 은행
-                .build()
-                .execute();
-    }
-
-    public void showCafeInformation(LatLng location) {
-        mGoogleMap.clear();//지도 클리어
-
-        if (previous_marker != null)
-            previous_marker.clear();//지역정보 마커 클리어
-
-        new NRPlaces.Builder()
-                .listener(MainActivity.this)
-                .key("AIzaSyAOtxROP-Ynn_otVKdD99FLnidOH6hGV0w")
-                .latlng(location.latitude, location.longitude)//현재 위치
-                .radius(1000) //1000 미터 내에서 검색
-                .type(PlaceType.CAFE) // 카페
-                .build()
-                .execute();
-    }
 
 }
