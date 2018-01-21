@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void showFoodInformation(LatLng location) {
-        mGoogleMap.clear();//지도 클리어
+        //mGoogleMap.clear();//지도 클리어
 
         if (previous_marker != null)
             previous_marker.clear();//이전 마커 초기화
@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity
                 .listener(MainActivity.this)
                 .key("AIzaSyAOtxROP-Ynn_otVKdD99FLnidOH6hGV0w")
                 .latlng(location.latitude, location.longitude)//현재 위치
-                .radius(500) //500 미터 내에서 검색
+                .radius(1000) //500 미터 내에서 검색
                 .type(PlaceType.RESTAURANT) //음식점
                 .build()
                 .execute();
@@ -190,7 +190,6 @@ public class MainActivity extends AppCompatActivity
 
 
     public void showBusInformation(LatLng location) {
-        mGoogleMap.clear();//지도 클리어
 
         if (previous_marker != null)
             previous_marker.clear();//지역정보 마커 클리어
@@ -199,7 +198,7 @@ public class MainActivity extends AppCompatActivity
                 .listener(MainActivity.this)
                 .key("AIzaSyAOtxROP-Ynn_otVKdD99FLnidOH6hGV0w")
                 .latlng(location.latitude, location.longitude)//현재 위치
-                .radius(500) //500 미터 내에서 검색
+                .radius(1000) //500 미터 내에서 검색
                 .type(PlaceType.BUS_STATION) // 버스정류장
                 .build()
                 .execute();
